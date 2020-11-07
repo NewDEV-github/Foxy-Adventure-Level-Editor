@@ -1,0 +1,227 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "HBoxContainer",
+"class": "AtbHBox",
+"language": "GDScript",
+"path": "res://src/scenes/editor/InspectorPanel/AtbHBox/AtbHbox.gd"
+}, {
+"base": "ColorRect",
+"class": "ButtonPressFx",
+"language": "GDScript",
+"path": "res://src/utils/ButtonFx/PressFx/ButtonPressFx.gd"
+}, {
+"base": "Reference",
+"class": "DataGameBg",
+"language": "GDScript",
+"path": "res://src/global_gameclass/data_gamebg.gd"
+}, {
+"base": "Resource",
+"class": "DataGameBoss",
+"language": "GDScript",
+"path": "res://src/global_gameclass/data_gameboss.gd"
+}, {
+"base": "Reference",
+"class": "DataGameLadder",
+"language": "GDScript",
+"path": "res://src/global_gameclass/data_gameladder.gd"
+}, {
+"base": "Reference",
+"class": "DataGameLevel",
+"language": "GDScript",
+"path": "res://src/global_gameclass/data_gamelevel.gd"
+}, {
+"base": "Reference",
+"class": "DataGameObject",
+"language": "GDScript",
+"path": "res://src/global_gameclass/data_gameobject.gd"
+}, {
+"base": "Reference",
+"class": "DataGameSpike",
+"language": "GDScript",
+"path": "res://src/global_gameclass/data_gamespike.gd"
+}, {
+"base": "Reference",
+"class": "DataGameTile",
+"language": "GDScript",
+"path": "res://src/global_gameclass/data_gametile.gd"
+}, {
+"base": "AcceptDialog",
+"class": "ExitUnsavedDialog",
+"language": "GDScript",
+"path": "res://src/scenes/editor/Popups/ExitUnsavedDialog/ExitUnsavedDialog.gd"
+}, {
+"base": "Reference",
+"class": "GameBgColorData",
+"language": "GDScript",
+"path": "res://src/database/game_bg_color_data.gd"
+}, {
+"base": "Reference",
+"class": "GameBgData",
+"language": "GDScript",
+"path": "res://src/database/game_bg_data.gd"
+}, {
+"base": "Reference",
+"class": "GameDataBuilder",
+"language": "GDScript",
+"path": "res://src/utils/game_data_builder.gd"
+}, {
+"base": "Node2D",
+"class": "GameGrid",
+"language": "GDScript",
+"path": "res://src/gameobj/game_grid/game_grid.gd"
+}, {
+"base": "Reference",
+"class": "GameLadderData",
+"language": "GDScript",
+"path": "res://src/database/game_ladder_data.gd"
+}, {
+"base": "Reference",
+"class": "GameSpikeData",
+"language": "GDScript",
+"path": "res://src/database/game_spike_data.gd"
+}, {
+"base": "TileMap",
+"class": "GameSpikeTileDrawer",
+"language": "GDScript",
+"path": "res://src/gameobj/game_spiketile_drawer/game_spiketile_drawer.gd"
+}, {
+"base": "Reference",
+"class": "GameTileSetData",
+"language": "GDScript",
+"path": "res://src/database/game_tileset_data.gd"
+}, {
+"base": "Node",
+"class": "Level",
+"language": "GDScript",
+"path": "res://src/scenes/level/level.gd"
+}, {
+"base": "Tabs",
+"class": "MainInspectorTab",
+"language": "GDScript",
+"path": "res://src/scenes/editor/InspectorPanel/Tab/MainInspectorTab.gd"
+}, {
+"base": "Panel",
+"class": "MenuBar",
+"language": "GDScript",
+"path": "res://src/scenes/editor/MenuBar/MenuBar.gd"
+}, {
+"base": "PreviewObject",
+"class": "PreviewGameObject",
+"language": "GDScript",
+"path": "res://src/gameobj/preview_object/preview_game_object.gd"
+}, {
+"base": "Node2D",
+"class": "PreviewObject",
+"language": "GDScript",
+"path": "res://src/gameobj/preview_object/preview_object.gd"
+}, {
+"base": "TextureButton",
+"class": "TileTextureButton",
+"language": "GDScript",
+"path": "res://src/scenes/editor/InspectorPanel/Tab/TilemapTab/TileTextureButton.gd"
+} ]
+_global_script_class_icons={
+"AtbHBox": "",
+"ButtonPressFx": "",
+"DataGameBg": "",
+"DataGameBoss": "",
+"DataGameLadder": "",
+"DataGameLevel": "",
+"DataGameObject": "",
+"DataGameSpike": "",
+"DataGameTile": "",
+"ExitUnsavedDialog": "",
+"GameBgColorData": "",
+"GameBgData": "",
+"GameDataBuilder": "",
+"GameGrid": "",
+"GameLadderData": "",
+"GameSpikeData": "",
+"GameSpikeTileDrawer": "",
+"GameTileSetData": "",
+"Level": "",
+"MainInspectorTab": "",
+"MenuBar": "",
+"PreviewGameObject": "",
+"PreviewObject": "",
+"TileTextureButton": ""
+}
+
+[application]
+
+config/name="Foxy Adventure Level Editor"
+run/main_scene="res://src/scenes/editor/editor.tscn"
+boot_splash/image="res://assets/images/splash/SplashScreen.png"
+boot_splash/bg_color=Color( 0.921569, 0.921569, 0.921569, 1 )
+config/auto_accept_quit=false
+config/year="2020"
+config/project_creator="New DEV"
+config/version="1.0"
+
+[autoload]
+
+EditorLogBox="*res://src/scenes/editor/MessageLogBox/EditorLogBox.tscn"
+WindowTitleUpdater="*res://src/singletons/WindowTitleUpdater.tscn"
+EditMode="*res://src/singletons/EditMode.tscn"
+SelectedObjects="*res://src/singletons/SelectedObjects.gd"
+LevelUndo="*res://src/singletons/LevelUndo.gd"
+UnsaveChanges="*res://src/singletons/UnsaveChanges.gd"
+ExitHandler="*res://src/singletons/ExitHandler.gd"
+CopyPaste="*res://src/singletons/CopyPaste.tscn"
+GlobalsEditor="*res://GlobalsEditor.gd"
+
+[display]
+
+window/size/width=800
+window/energy_saving/keep_screen_on=false
+
+[editor_plugins]
+
+enabled=PoolStringArray( "welcome_dialog" )
+
+[gui]
+
+timers/tooltip_delay_sec=0.3
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[memory]
+
+limits/message_queue/max_size_kb=2048
+
+[rendering]
+
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=1
+quality/2d/use_pixel_snap=true
+environment/default_environment="res://default_env.tres"
