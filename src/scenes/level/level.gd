@@ -104,6 +104,23 @@ func save_level(level_dir : String, level_file_path : String) -> void:
 	ResourceSaver.save(level_file_path, scn)
 	print("Level saved at path: " + level_file_path)
 
+func add_bg_audio_from_external_file(path):
+	var audio = path
+	var file = File.new()
+	file.open(path, File.READ)
+	var buffer = file.get_buffer(file.get_len())
+	var stream_data = AudioStreamSample.new()
+	stream_data.data = buffer
+	self.get_node("AudioStreamPlayer").stream = stream_data
+
+func set_bg_audio_autoplay(auto_play:bool = true):
+	$AudioStreamPlayer.autoplay = auto_play
+
+func set_bg_audio_volume(volume):
+	$AudioStreamPlayer.volume_db = volume
+
+func set_bg_audio_paused(auto_play:bool = true):
+	$AudioStreamPlayer.autoplay = auto_play
 func construct_level(file_data : String):
 	clear_level()
 	

@@ -42,8 +42,14 @@ var current_level_path : String
 #      Notifications
 #-------------------------------------------------
 
+var default_filters = [
+	"*.tscn, Level File"
+]
 func _ready() -> void:
+	set_open_file_filters(PoolStringArray(default_filters))
+	set_save_file_filters(PoolStringArray(default_filters))
 	$OpenFileDialog.set_current_path(GlobalsEditor.saved_levels_root_path)
+	$OpenAudioFileDialog.set_current_path(GlobalsEditor.saved_levels_root_path)
 	$SaveFileDialog.set_current_path(GlobalsEditor.saved_levels_root_path)
 
 #-------------------------------------------------
@@ -58,8 +64,17 @@ func _ready() -> void:
 #      Public Methods
 #-------------------------------------------------
 
+func set_open_file_filters(new_filters:PoolStringArray):
+	$OpenFileDialog.filters = new_filters
+
+func set_save_file_filters(new_filters:PoolStringArray):
+	$SaveFileDialog.filters = new_filters
+
 func open_file():
 	$OpenFileDialog.popup()
+
+func open_audio_file():
+	$OpenAudioFileDialog.popup()
 
 func open_containing_folder():
 	OS.shell_open(_get_mega_maker_path())
@@ -126,3 +141,7 @@ func _get_mega_maker_path() -> String:
 #-------------------------------------------------
 #      Setters & Getters
 #-------------------------------------------------
+
+
+func _on_OpenAudioFileDialog_file_selected(path: String) -> void:
+	Level.new().add_bg_audio_from_external_file(path)

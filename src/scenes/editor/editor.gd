@@ -52,6 +52,7 @@ onready var reload_level_dialog = $CanvasLayer/Control/Popups/ReloadLevelDialog
 #-------------------------------------------------
 
 func _ready() -> void:
+	$CanvasLayer/Control/ToolBar.connect("add_audio_pressed", self, "on_add_audio_pressed")
 	_connect_ExitHandler()
 	_update_window_title_by_level_path("")
 	inspector_panel.load_level_config()
@@ -339,6 +340,9 @@ func _do_unsaved_changes_pending_request():
 		exit_unsaved_dialog.PendingRequest.EXIT_APP:
 			get_tree().quit()
 
+func on_add_audio_pressed():
+#	$CanvasLayer/Control/FileAccessCtrl.set_open_file_filters(PoolStringArray(audio_filters))
+	$CanvasLayer/Control/FileAccessCtrl.open_audio_file()
 #-------------------------------------------------
 #      Setters & Getters
 #-------------------------------------------------

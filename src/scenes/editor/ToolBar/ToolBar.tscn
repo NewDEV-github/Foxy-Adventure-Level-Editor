@@ -81,19 +81,19 @@ margin_right = 4.0
 margin_bottom = 64.0
 
 [node name="EditModeVBox" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 64.0
+margin_right = 120.0
 margin_bottom = 50.0
 size_flags_vertical = 0
 
 [node name="CategoryLabel" type="Label" parent="HBoxContainer/EditModeVBox"]
-margin_right = 64.0
+margin_right = 120.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Edit Mode"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/EditModeVBox"]
 margin_top = 18.0
-margin_right = 64.0
+margin_right = 120.0
 margin_bottom = 50.0
 custom_constants/separation = 12
 
@@ -140,8 +140,29 @@ __meta__ = {
 }
 
 [node name="BgBtn" type="TextureButton" parent="HBoxContainer/EditModeVBox/HBoxContainer"]
-visible = false
-margin_right = 32.0
+margin_left = 44.0
+margin_right = 76.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Background Edit Tool:
+* Left Button: Place tile.
+* Right Button: Remove tile.
+* Alt + Left Button: Pick a tile from the position of the cursor."
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 10 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioBtn" type="TextureButton" parent="HBoxContainer/EditModeVBox/HBoxContainer"]
+margin_left = 88.0
+margin_right = 120.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Background Edit Tool:
@@ -162,8 +183,8 @@ __meta__ = {
 
 [node name="ActiveScreenBtn" type="TextureButton" parent="HBoxContainer/EditModeVBox/HBoxContainer"]
 visible = false
-margin_left = 44.0
-margin_right = 76.0
+margin_left = 88.0
+margin_right = 120.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Active Screen Edit Tool:
@@ -184,8 +205,8 @@ __meta__ = {
 
 [node name="LadderBtn" type="TextureButton" parent="HBoxContainer/EditModeVBox/HBoxContainer"]
 visible = false
-margin_left = 44.0
-margin_right = 76.0
+margin_left = 88.0
+margin_right = 120.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Ladder Edit Tool:
@@ -207,8 +228,8 @@ __meta__ = {
 
 [node name="SpikeBtn" type="TextureButton" parent="HBoxContainer/EditModeVBox/HBoxContainer"]
 visible = false
-margin_left = 44.0
-margin_right = 76.0
+margin_left = 88.0
+margin_right = 120.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 hint_tooltip = "Spike Edit Tool:
@@ -227,11 +248,13 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
 [connection signal="pressed" from="HBoxContainer/ObjVBox/AddBtn" to="." method="_on_AddBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/ButtonsToggler" to="." method="_on_ButtonsToggler_pressed"]
 [connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/ObjectBtn" to="." method="_on_ObjectBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/TileMapBtn" to="." method="_on_TileMapBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/BgBtn" to="." method="_on_BgBtn_pressed"]
+[connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/AudioBtn" to="." method="_on_AudioBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/ActiveScreenBtn" to="." method="_on_ActiveScreenBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/LadderBtn" to="." method="_on_LadderBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/EditModeVBox/HBoxContainer/SpikeBtn" to="." method="_on_SpikeBtn_pressed"]

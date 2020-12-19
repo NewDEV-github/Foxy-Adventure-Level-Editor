@@ -18,6 +18,7 @@ extends Panel
 #-------------------------------------------------
 
 signal add_object_pressed
+signal add_audio_pressed
 
 signal pressed
 
@@ -87,3 +88,7 @@ func _on_ButtonsToggler_pressed() -> void:
 #-------------------------------------------------
 #      Setters & Getters
 #-------------------------------------------------
+
+
+func _on_AudioBtn_pressed() -> void:
+	emit_signal("add_audio_pressed")

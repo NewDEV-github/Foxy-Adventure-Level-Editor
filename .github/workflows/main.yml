@@ -6,9 +6,11 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
     tags:
       - '*'
+    branches: [ master ]
+    paths-ignore:
+    - 'game_version.txt'
   pull_request:
     branches: [ master ]
   
@@ -23,13 +25,35 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: Calculate GIT short ref
+        run: |
+          echo "GITHUB_SHA_SHORT=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+      - name: Update game_version.txt file # transfer the new html files back into the repository
+        run: |
+          echo ${{ env.GITHUB_SHA_SHORT }} > editor_version.txt
+          git config --local user.name "Github Actions"
+          git config --local user.email "githubactions@github.com"
+          git add editor_version.txt
+          git commit -m "Updating game verion file..."
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
+      #- name: Write Version to File
+  # You may pin to the exact commit or the version.
+  # uses: brettdorrans/write-version-to-file@ea48c38c3afc479e8b2645a19743c24200966f3d
+       # uses: brettdorrans/write-version-to-file@v1.0.0
+        #with:
+    # The filename to write the version tag to
+         #filename: game_version.txt
       - name: Build for Linux 32-bit
   # You may pin to the exact commit or the version.
   # uses: josephbmanley/build-godot-action@5206884b2f984e37d89c07e535590129a29eb182
-        uses: josephbmanley/build-godot-action@v1.4.0
+        uses: josephbmanley/build-godot-action@v1.4.1
         with:
     # Name of the exported binary
-         name: FoxyAdventure.32
+         name: FoxyAdventureLevelEditor.32
     # Name of the preset in `export_presets.cfg` to use
          preset: x11-32
     # Optional name of the subdirectory to put exported project in
@@ -41,10 +65,10 @@ jobs:
       - name: Build for Linux 64-bit
   # You may pin to the exact commit or the version.
   # uses: josephbmanley/build-godot-action@5206884b2f984e37d89c07e535590129a29eb182
-        uses: josephbmanley/build-godot-action@v1.4.0
+        uses: josephbmanley/build-godot-action@v1.4.1
         with:
     # Name of the exported binary
-         name: FoxyAdventure.64
+         name: FoxyAdventureLevelEditor.64
     # Name of the preset in `export_presets.cfg` to use
          preset: x11-64
     # Optional name of the subdirectory to put exported project in
@@ -56,10 +80,10 @@ jobs:
       - name: Build for Windows 32-bit
   # You may pin to the exact commit or the version.
   # uses: josephbmanley/build-godot-action@5206884b2f984e37d89c07e535590129a29eb182
-        uses: josephbmanley/build-godot-action@v1.4.0
+        uses: josephbmanley/build-godot-action@v1.4.1
         with:
     # Name of the exported binary
-         name: FoxyAdventure.exe
+         name: FoxyAdventureLevelEditor.exe
     # Name of the preset in `export_presets.cfg` to use
          preset: win-32
     # Optional name of the subdirectory to put exported project in
@@ -71,10 +95,10 @@ jobs:
       - name: Build for Windows 64-bit
   # You may pin to the exact commit or the version.
   # uses: josephbmanley/build-godot-action@5206884b2f984e37d89c07e535590129a29eb182
-        uses: josephbmanley/build-godot-action@v1.4.0
+        uses: josephbmanley/build-godot-action@v1.4.1
         with:
     # Name of the exported binary
-         name: FoxyAdventure.exe
+         name: FoxyAdventureLevelEditor.exe
     # Name of the preset in `export_presets.cfg` to use
          preset: win-64
     # Optional name of the subdirectory to put exported project in
@@ -86,10 +110,10 @@ jobs:
       - name: Build for Mac OS X
   # You may pin to the exact commit or the version.
   # uses: josephbmanley/build-godot-action@5206884b2f984e37d89c07e535590129a29eb182
-        uses: josephbmanley/build-godot-action@v1.4.0
+        uses: josephbmanley/build-godot-action@v1.4.1
         with:
     # Name of the exported binary
-         name: FoxyAdventure.zip
+         name: FoxyAdventureLevelEditor.zip
     # Name of the preset in `export_presets.cfg` to use
          preset: osx
     # Optional name of the subdirectory to put exported project in
@@ -106,17 +130,14 @@ jobs:
           zip -r build-x11-64.zip build/build-x11-64
           zip -r build-win-32.zip build/build-win-32
           zip -r build-win-64.zip build/build-win-64
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Release snapshot
         id: release-snapshot
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.date.outputs.date }}
-          release_name: Release from ${{ steps.date.outputs.date }}
+          tag_name: ${{ env.GITHUB_SHA_SHORT }}
+          release_name: Release from ${{ env.GITHUB_SHA_SHORT }} commit
           draft: false
           prerelease: false
       - name: Upload Release Asset (Linux 32-bit)

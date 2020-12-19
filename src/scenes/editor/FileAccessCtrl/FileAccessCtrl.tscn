@@ -1,8 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/scenes/editor/FileAccessCtrl/FileAccessCtrl.gd" type="Script" id=1]
 [ext_resource path="res://src/utils/AnimatedPopupAnim/AnimatedPopupAnim.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/scenes/editor/FileAccessCtrl/FileUpdateChecker.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Popup"
+length = 0.18
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
+"transitions": PoolRealArray( 2, 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1.05, 1.05 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+}
 
 [node name="FileAccessCtrl" type="Control"]
 anchor_right = 1.0
@@ -21,19 +38,45 @@ margin_left = -308.0
 margin_top = -208.0
 margin_right = 308.0
 margin_bottom = 208.0
+rect_min_size = Vector2( 150, 52.5 )
 window_title = "Otwórz plik"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.tscn" )
 show_hidden_files = true
-current_dir = "/home/godot/Pobrane/mega-man-maker-mmlv-editor-master/Project"
-current_path = "/home/godot/Pobrane/mega-man-maker-mmlv-editor-master/Project/"
+current_dir = "/home/godot/Pulpit/Foxy-Adventure-Level-Editor"
+current_path = "/home/godot/Pulpit/Foxy-Adventure-Level-Editor/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimatedPopupAnim" parent="OpenFileDialog" instance=ExtResource( 2 )]
+
+[node name="OpenAudioFileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -308.0
+margin_top = -208.0
+margin_right = 308.0
+margin_bottom = 208.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Otwórz plik"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.ogg; OGG Vorbis", "*.wav; WAV" )
+show_hidden_files = true
+current_dir = "/home/godot/Pulpit/Foxy-Adventure-Level-Editor"
+current_path = "/home/godot/Pulpit/Foxy-Adventure-Level-Editor/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedPopupAnim" parent="OpenAudioFileDialog" instance=ExtResource( 2 )]
+anims/Popup = SubResource( 1 )
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 visible = true
@@ -45,13 +88,15 @@ margin_left = -308.0
 margin_top = -208.0
 margin_right = 308.0
 margin_bottom = 208.0
+rect_min_size = Vector2( 150, 52.5 )
 rect_scale = Vector2( 1e-05, 1e-05 )
 window_title = "Zapisz plik"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.tscn" )
-current_dir = "/home/godot/Pobrane/mega-man-maker-mmlv-editor-master/Project"
-current_path = "/home/godot/Pobrane/mega-man-maker-mmlv-editor-master/Project/"
+show_hidden_files = true
+current_dir = "/home/godot/Pulpit/Foxy-Adventure-Level-Editor"
+current_path = "/home/godot/Pulpit/Foxy-Adventure-Level-Editor/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -59,6 +104,8 @@ __meta__ = {
 [node name="AnimatedPopupAnim" parent="SaveFileDialog" instance=ExtResource( 2 )]
 
 [node name="FileUpdateChecker" parent="." instance=ExtResource( 3 )]
+
 [connection signal="file_selected" from="OpenFileDialog" to="." method="_on_OpenFileDialog_file_selected"]
+[connection signal="file_selected" from="OpenAudioFileDialog" to="." method="_on_OpenAudioFileDialog_file_selected"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_SaveFileDialog_file_selected"]
 [connection signal="detected" from="FileUpdateChecker" to="." method="_on_FileUpdateChecker_detected"]
