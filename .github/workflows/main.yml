@@ -6,9 +6,6 @@ name: BuildEditor
 # events but only for the master branch
 on:
   push:
-    tags:
-      - '*'
-    branches: [ master ]
     paths-ignore:
     - 'game_version.txt'
   pull_request:
