@@ -9,7 +9,7 @@ var stage_path
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Editor.connect("stage_preloaded", self, "editor_stage_preloaded")
-	FileLoadPopup.connect("stage_file_selected", self, "file_sel")
+	$FileLoadPopup.connect("stage_file_selected", self, "file_sel")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,11 +18,11 @@ func _ready() -> void:
 
 
 func _on_New_pressed() -> void:
-	get_tree().change_scene("res://Editor.tscn")
+	$NewFile.popup_centered()
 
 func file_sel(path):
 	Editor.preload_stage(path)
 func _on_Load_pressed() -> void:
-	FileLoadPopup.show_popup()
+	$FileLoadPopup.show_popup()
 func editor_stage_preloaded():
 	get_tree().change_scene("res://Editor.tscn")

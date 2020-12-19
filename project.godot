@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Foxy Adventure Level Editor"
-run/main_scene="res://src/scenes/editor/editor.tscn"
+run/main_scene="res://Main.tscn"
 boot_splash/image="res://assets/images/splash/SplashScreen.png"
 boot_splash/bg_color=Color( 0.921569, 0.921569, 0.921569, 1 )
 config/auto_accept_quit=false
@@ -22,7 +22,6 @@ config/version="1.0"
 [autoload]
 
 MainSingleton="*res://MainSingleton.gd"
-FileLoadPopup="*res://ui/FileLoadPopup.gd"
 
 [display]
 

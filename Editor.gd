@@ -20,7 +20,8 @@ func load_stage(path):
 func _ready() -> void:
 	$TileMap.paint_tile(Vector2(100, 100), 4)
 func clear_all():
-	$TileMap.clear()
+	if $TileMap:
+		$TileMap.clear()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -28,5 +29,6 @@ func _process(delta: float) -> void:
 
 func save_level():
 	var p_scn = PackedScene.new()
-	p_scn.get_local_scene()
+	p_scn.pack($".")
+	p_scn.pack($TileMap)
 	ResourceSaver.save(MainSingleton.level_path + "/" + MainSingleton.level_name + ".tscn", p_scn)

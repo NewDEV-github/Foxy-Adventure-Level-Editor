@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/TileSelector.gd" type="Script" id=1]
+[ext_resource path="res://Graphics/Tilesets/sci-fi-tileset.png" type="Texture" id=2]
 
 [node name="TileSelector" type="Panel"]
 anchor_left = 1.0
+anchor_top = 0.058
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -100.0
+margin_top = 0.199999
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -15,15 +18,77 @@ __meta__ = {
 [node name="Conatiner" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tile1" type="TextureButton" parent="Conatiner"]
-margin_right = 100.0
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Tile1" type="Button" parent="Conatiner"]
+margin_right = 99.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
 
-[connection signal="pressed" from="Conatiner/Tile1" to="." method="tile_selected" binds= [ "Tile1" ]]
+[node name="Sprite" type="Sprite" parent="Conatiner/Tile1"]
+position = Vector2( 15, 14 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 15, 15 )
+
+[node name="Tile2" type="Button" parent="Conatiner"]
+margin_top = 34.0
+margin_right = 99.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 30, 30 )
+
+[node name="Sprite" type="Sprite" parent="Conatiner/Tile2"]
+position = Vector2( 15, 14 )
+rotation = 1.5708
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 15, 0, 15, 15 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Conatiner"]
+margin_top = 68.0
+margin_right = 99.0
+margin_bottom = 88.0
+
+[node name="rotateleft" type="Button" parent="Conatiner/HBoxContainer"]
+visible = false
+margin_right = 16.0
+margin_bottom = 20.0
+text = "l"
+
+[node name="rotateright" type="Button" parent="Conatiner/HBoxContainer"]
+visible = false
+margin_left = 20.0
+margin_right = 37.0
+margin_bottom = 20.0
+text = "r"
+
+[node name="flipx" type="Button" parent="Conatiner/HBoxContainer"]
+margin_right = 19.0
+margin_bottom = 20.0
+toggle_mode = true
+text = "x"
+
+[node name="flipy" type="Button" parent="Conatiner/HBoxContainer"]
+margin_left = 23.0
+margin_right = 42.0
+margin_bottom = 20.0
+toggle_mode = true
+text = "y"
+
+[node name="clear" type="Button" parent="Conatiner/HBoxContainer"]
+margin_left = 46.0
+margin_right = 89.0
+margin_bottom = 20.0
+toggle_mode = true
+text = "clear"
+
+[connection signal="pressed" from="Conatiner/Tile1" to="." method="tile_selected" binds= [ "sci-fi-tileset.png 4" ]]
+[connection signal="pressed" from="Conatiner/Tile2" to="." method="tile_selected" binds= [ "sci-fi-tileset.png 7" ]]
+[connection signal="pressed" from="Conatiner/HBoxContainer/rotateleft" to="." method="_on_rotateleft_pressed"]
+[connection signal="pressed" from="Conatiner/HBoxContainer/rotateright" to="." method="_on_rotateright_pressed"]
+[connection signal="toggled" from="Conatiner/HBoxContainer/flipx" to="." method="_on_flipx_toggled"]
+[connection signal="toggled" from="Conatiner/HBoxContainer/flipy" to="." method="_on_flipy_toggled"]
+[connection signal="toggled" from="Conatiner/HBoxContainer/clear" to="." method="_on_clear_toggled"]

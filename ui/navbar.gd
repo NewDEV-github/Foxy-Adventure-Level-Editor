@@ -18,6 +18,10 @@ func bg_menu_selected(id:int):
 	pass
 
 func file_menu_selected(id:int):
+	if id == 0:
+		$NewFile.popup_centered()
+	if id == 1:
+		$FileLoadPopup.popup_centered()
 	if id == 2:
 		Editor.save_level()
 
