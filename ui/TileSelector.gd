@@ -37,7 +37,7 @@ func rotate_tiles_in_panel(mode:int):
 
 func flip_tiles_in_panel(mode:int, value:bool):
 	var sprite
-	for i in $Conatiner.get_children():
+	for i in $Container.get_children():
 #		print("child found" + str(i))
 		sprite = i.get_node("Sprite")
 		if mode == 0 and sprite: #flip x
@@ -68,3 +68,7 @@ func _on_flipy_toggled(button_pressed: bool) -> void:
 
 func _on_clear_toggled(button_pressed: bool) -> void:
 	MainSingleton.erase_tiles = button_pressed
+
+
+func _on_VScrollBar_value_changed(value: float) -> void:
+	$Container.set_position(Vector2(0, -(value*7.01)))

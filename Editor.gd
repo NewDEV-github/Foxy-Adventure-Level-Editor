@@ -25,7 +25,8 @@ func clear_all():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$TileMap.paint_tile(get_global_mouse_position(), 8)
+	if Input.is_action_pressed("paint_tile"):
+		$TileMap.paint_tile(get_global_mouse_position(), 8)
 
 func save_level():
 	var p_scn = PackedScene.new()
