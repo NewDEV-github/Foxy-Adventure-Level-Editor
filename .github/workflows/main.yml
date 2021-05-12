@@ -91,7 +91,7 @@ jobs:
           prerelease: false
       - name: Upload Release Asset - x11-64
         id: upload-release-asset-x1164
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -101,7 +101,7 @@ jobs:
           asset_content_type: application/zip
       - name: Upload Release Asset - x11-32
         id: upload-release-asset-x1132
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -111,7 +111,7 @@ jobs:
           asset_content_type: application/zip
       - name: Upload Release Asset - osx-64
         id: upload-release-asset-osx64
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -121,7 +121,7 @@ jobs:
           asset_content_type: application/zip
       - name: Upload Release Asset - win-32
         id: upload-release-asset-win32
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -131,7 +131,7 @@ jobs:
           asset_content_type: application/zip
       - name: Upload Release Asset - win-64
         id: upload-release-asset-win64
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
